@@ -1,0 +1,100 @@
+package testick;
+
+public class Solution {
+	
+	
+	static int getResult(String map, String hero){
+		//###объявление_размещение_массивов
+		int[]por;
+		por=new int[map.length()];
+		int[] numb;
+		numb=new int[map.length()];
+		char[]znac;
+		znac=new char[map.length()];
+		//###объявление_размещение_массивов_end
+		//###Инициализация_массивов
+		for(int i=0; i<map.length(); i++) {
+			por[i]=i;
+			znac[i]=map.charAt(i);
+			//###Влияние_ландшафта
+			if(znac[i]=='s') {   
+				if(hero=="Human"){
+				numb[i]=5;
+				}else if(hero=="Swamper") {
+					numb[i]=2;
+				}else if(hero=="Woodman") {
+					numb[i]=3;
+				}else {
+					System.out.println("No!");
+					break;
+				}
+			}else if(znac[i]=='w') {
+				if(hero=="Human"){
+					numb[i]=2;
+					}else if(hero=="Swamper") {
+						numb[i]=2;
+					}else if(hero=="Woodman") {
+						numb[i]=3;
+					}else {
+						System.out.println("No!");
+						break;
+					}
+			}else if(znac[i]=='t') {
+				if(hero=="Human"){
+					numb[i]=3;
+					}else if(hero=="Swamper") {
+						numb[i]=5;
+					}else if(hero=="Woodman") {
+						numb[i]=2;
+					}else {
+						System.out.println("No!");
+						break;
+					}
+				
+			}else if(znac[i]=='p') {
+				if(hero=="Human"){
+					numb[i]=1;
+					}else if(hero=="Swamper") {
+						numb[i]=2;
+					}else if(hero=="Woodman") {
+						numb[i]=2;
+					}else {
+						System.out.println("No!");
+						break;
+					}
+			}else {numb[i]=0;}
+			//##влияние_ландшафта_end
+			//###контроль_длины_карты
+			if(map.length()>16 || map.length()<16) {
+			 System.out.println("NO-no");
+			 break;
+			}
+			//###контроль_длины_карты_end
+		}
+		//###Инициализация_массивов_end
+		//###итоговые переменные
+		int i=0; //###счетчик итераций
+		int y=0; //###Число шагов
+		int z=0; //###Количество потраченной силы
+	//###Сравнение_и_расчет
+	do {
+	if(numb[i+1]<=numb[i+4] && por[i]<3 /**/|| numb[i+1]<=numb[i+4] && por[i]<7 && por[i]!=3
+	|| numb[i+1]<=numb[i+4] && por[i]<11 && por[i]!=7)
+	{System.out.println("i+1 "+por[i+1]+" "+numb[i+1]);z=z+numb[i+1]; i=i+1; y=y+1; }
+
+	else if(numb[i+1]>numb[i+4] || por[i]==11 || por[i]==7 || por[i]==3) 
+	{System.out.println("i+4 "+por[i+4]+" "+numb[i+4]);z=z+numb[i+4]; i=i+4; y=y+1; }
+
+	else {
+		break;
+	}
+		}while(por[i]<16-4);
+	//###Сравнение_и_расчет_end
+		System.out.println(y+" "+z);
+		return i;
+	}
+	public static void main(String[]args) {
+		getResult("stpwttpwppwtsptp", "Human");
+}
+}
+
